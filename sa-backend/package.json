@@ -1,0 +1,19 @@
+{
+  "name": "sa-backend",
+  "version": "1.0.0",
+  "description": "Rest api for vax-app",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "test",
+    "start": "nodemon index.js"
+  },
+  "author": "mansicka",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "sequelize": "^6.6.5",
+    "sqlite": "^4.0.23",
+    "sqlite3": "^5.0.2"
+  }
+}
