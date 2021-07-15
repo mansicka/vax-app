@@ -18,7 +18,9 @@ db.orders = require('./model/vaccineOrder')(sequelize, Sequelize);
 
 db.orders.hasMany(db.vaccinations, {as: 'vaccinations'});
 db.vaccinations.belongsTo(db.orders, {
-  foreignKey: 'bottle_id',
-  as: 'origin_bottle_id'
+  foreignKey: 'order_id',
+  as: 'origin_bottle',
+  onUpdate: 'NO ACTION',
+  onDelete: 'NO ACTION'
 });
   module.exports = db;

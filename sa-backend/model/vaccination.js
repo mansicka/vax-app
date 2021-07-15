@@ -5,13 +5,14 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
         },
         gender: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: false
         },
         date: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: false
         }
     });
   
     return Vaccination;
-  };
-
+  }

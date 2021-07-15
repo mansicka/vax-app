@@ -1,14 +1,34 @@
 module.exports = (sequelize, DataTypes) => {
     const VaccinationOrder = sequelize.define("orders", {
-        id: {
+        order_id: {
             type: DataTypes.STRING,
             primaryKey: true,
         },
-        gender: {
-            type: DataTypes.STRING
+        order_number: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            allowNull: false
         },
-        date: {
-            type: DataTypes.STRING
+        responsible_person: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        district: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        vaccine_brand: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        injections: {
+            type: DataTypes.INTEGER,
+            defaultValue: 4,
+            allowNull: false
+        },
+        arrival_date: {
+            type: DataTypes.STRING,
+            allowNull: false
         }
     });
   
