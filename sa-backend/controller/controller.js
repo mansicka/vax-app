@@ -1,8 +1,8 @@
 const db = require("../database");
-const vaccination = require("../model/vaccination");
 const Vaccination = db.vaccinations;
 const Order = db.orders;
-const makeId = require('../util/makeid')
+const makeId = require('../util/makeid');
+
 
 exports.createVaccination = (origin_bottle, vaccination) => {
     generatedId = makeId();
