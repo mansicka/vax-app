@@ -20,7 +20,7 @@ db.orders.hasMany(db.vaccinations, {as: 'vaccinations'});
 db.vaccinations.belongsTo(db.orders, {
   foreignKey: 'order_id',
   as: 'origin_bottle',
-  onUpdate: 'NO ACTION',
+  onUpdate: 'CASCADE',
   onDelete: 'NO ACTION'
 });
   module.exports = db;

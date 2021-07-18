@@ -12,6 +12,9 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "inquirer": "^8.1.2",
+    "line-by-line": "^0.1.6",
+    "readline-sync": "^1.4.10",
     "sequelize": "^6.6.5",
     "sqlite": "^4.0.23",
     "sqlite3": "^5.0.2"
