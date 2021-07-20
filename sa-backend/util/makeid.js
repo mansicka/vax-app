@@ -12,7 +12,6 @@ const makeId = () => {
     return result;
   };
 var id = generate(8) + '-' + generate(4) + '-' + generate(4) + '-' + generate(12);
-console.log(id);
 return id;
 }
 

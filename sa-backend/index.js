@@ -1,28 +1,29 @@
 const express = require('express');
-const db = require('./database');
+const db = require('./models/database');
 const app = express();
-const Order = require('./model/vaccineOrder');
-const Vaccination = require ('./model/vaccination')
-const makeId = require('./util/makeid');
-const jsonUtil = require('./util/sourceUtils');
-const inquirer  = require('./util/cliUtil');
+const cors = require("cors");
+
+//Sync db (Add {force: true} as a parameter for sync() for db reset)
+// Be sure to import dummy data using importSources.js before running this :D
 
 
-//start express on port 3388
-app.listen(3388 , () => {
-    console.log(process.env.npm_package_name + ' : express started')
+
+var corsOptions = {
+    origin: "http://localhost:8081"
+};
+
+app.use(cors(corsOptions));
+
+app.use(express.json({ limit: '50mb' }));
+
+app.use(express.urlencoded({ extended: true }));
+
+app.get("/", (req, res) => {
+    res.json({ message: "OK" });
 });
-//sync db (Add {force: true} as a parameter for sync() for db reset)
-db.sequelize.sync({force: true})
-.then(() => {
-    console.log(process.env.npm_package_name + '\
- : database init ok')
-    run();
+
+require("./routes/routes")(app);
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+    console.log('server is running on port ' + PORT);
 });
-
-const run = async () => {
-    inquirer.inquirer;
-
-}
-
-  
