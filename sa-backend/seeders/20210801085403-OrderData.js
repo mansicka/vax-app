@@ -1,5 +1,5 @@
 'use strict';
-const source = ['./source/SolarBuddhica.source', './source/Antiqua.source', './source/Zerpfy.source'];
+const source = ['./seeders/source/SolarBuddhica.source', './seeders/source/Antiqua.source', './seeders/source/Zerpfy.source'];
 const fs = require('fs');
 const readline = require('readline');
 const data = [];
@@ -7,62 +7,72 @@ const data = [];
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
+    parseSourceFile(source)
+      .then((data) => {
+        return queryInterface.bulkInsert('Orders', data)
+      });
   },
 
   down: async (queryInterface, Sequelize) => {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+    return queryInterface.bulkDelete('Orders', null);
   }
 };
 
-//read all source files 
-const parseSourceFile = (source) => {
-  source.forEach(file => {
-    readSourceFile(file)
-      .then(() => {
-        return data;
-      })
-  });
+//read all source files
+const parseSourceFile = async (source) => {
+  return new Promise((resolve) => {
+    let n = 0;
+    let result = [];
+    source.forEach(file => {
+      readSourceFile(file)
+        .then((r) => {
+          result = result.concat(r);
+          n++;
+          if (n == source.length) {
+            resolve(result);
+          }
+        });
+    })
+  })
 }
 
 //read source file line by line
-async function readSourceFile(file) {
-  const fileStream = fs.createReadStream(file);
+const readSourceFile = async (file) => {
+  return new Promise((resolve) => {
+    const fileStream = fs.createReadStream(file);
+    const rl = readline.createInterface({
+      input: fileStream,
+    });
+    let data = [];
+    rl.on('line', (line) => {
+      //parse & push the object to data array
+      let strArray = line.split('"');
+      let dateNoZ = strArray[23].toString().slice(0, -1);
 
-  const rl = readline.createInterface({
-    input: fileStream,
-    crlfDelay: Infinity
+      //Mysql has a known bug when inserting datetime with trailing z's so cut those off ;P
+      let date = new Date().toISOString().slice(0, -1);
+      //
+      let orderObject = {
+        id: strArray[3],
+        order_number: strArray[6].slice(1, -1),
+        responsible_person: strArray[9],
+        district: strArray[13],
+        vaccine_brand: strArray[17],
+        injections: strArray[20].slice(1, -1),
+        arrival_date: dateNoZ,
+        createdAt: date,
+        updatedAt: date,
+        injections_left: strArray[20].slice(1, -1),
+      }
+
+      data.push(orderObject);
+    });
+
+    fileStream.on('end', () => {
+      resolve(data);
+    }
+    )
   });
 
-  for await (const line of rl) {
-    //parse & push the object to data array
-    let strArray = line.split('"');
-    let date = new Date();
-    let orderObject = {
-      id: strArray[3],
-      order_number: strArray[6].slice(1, -1),
-      responsible_person: strArray[9],
-      district: strArray[13],
-      brand: strArray[17],
-      injections: strArray[20].slice(1, -1),
-      arrival_date: strArray[23],
-      createdAt: date,
-      updatedAt: date,
-    }
-  }
-  data.push(orderObject);
-
 };
+

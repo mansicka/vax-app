@@ -9,7 +9,8 @@ app.use(express.json());
 
 db.sequelize.sync().then(() => {
     app.listen(PORT, () => {
-        console.log('express running on port ' + PORT + ': http://localhost:3000');
+        console.log('\n Express running on port ' + PORT + ': http://localhost:3000 \
+        \n Remember to run run_seeders to populate the db ;)');
     });
 
 });

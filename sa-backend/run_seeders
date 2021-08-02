@@ -1,0 +1,3 @@
+#!/bin/bash
+npx sequelize db:seed --seed  20210801085348-VaccinationData.js
+npx sequelize db:seed --seed 20210801085403-OrderData.js

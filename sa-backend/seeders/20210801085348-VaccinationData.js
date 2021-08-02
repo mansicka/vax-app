@@ -10,8 +10,6 @@ module.exports = {
       .then((data) => {
         return queryInterface.bulkInsert('Vaccinations', data)
       });
-
-
   },
 
   down: async (queryInterface, Sequelize) => {
@@ -24,7 +22,6 @@ const parseSourceFile = async (source) => {
   return new Promise((resolve) => {
     let n = 0;
     let result = [];
-    console.log(source.length)
     source.forEach(file => {
       readSourceFile(file)
         .then((r) => {
@@ -51,7 +48,7 @@ const readSourceFile = async (file) => {
       let strArray = line.split('"');
       let date = new Date().toISOString().slice(0, -1);
 
-      //Mysql has a known bug when inserting datetime with trailing z's so cut that off ;P
+      //Mysql has a known bug when inserting datetime with trailing z's so cut those off ;P
       let dateNoZ = strArray[15].toString().slice(0, -1);
 
       let vaccinationObject = {
