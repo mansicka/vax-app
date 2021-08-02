@@ -8,8 +8,7 @@ module.exports = {
 
     parseSourceFile(source)
       .then((data) => {
-        console.log(data)
-        // return queryInterface.bulkInsert('Vaccinations', data)
+        return queryInterface.bulkInsert('Vaccinations', data)
       });
 
 
@@ -26,18 +25,16 @@ const parseSourceFile = async (source) => {
     let n = 0;
     let result = [];
     console.log(source.length)
-    while (n < source.length) {
-      source.forEach(file => {
-        readSourceFile(file)
-          .then((r) => {
-            result = result.concat(r);
-            n++;
-          });
-        if (n == source.length) {
-          resolve(result);
-        }
-      })
-    };
+    source.forEach(file => {
+      readSourceFile(file)
+        .then((r) => {
+          result = result.concat(r);
+          n++;
+          if (n == source.length) {
+            resolve(result);
+          }
+        });
+    })
   })
 }
 
@@ -52,11 +49,15 @@ const readSourceFile = async (file) => {
     rl.on('line', (line) => {
       //parse & push the object to data array
       let strArray = line.split('"');
-      let date = new Date();
+      let date = new Date().toISOString().slice(0, -1);
+
+      //Mysql has a known bug when inserting datetime with trailing z's so cut that off ;P
+      let dateNoZ = strArray[15].toString().slice(0, -1);
+
       let vaccinationObject = {
         id: strArray[3],
         gender: strArray[11],
-        date: strArray[15],
+        date: dateNoZ,
         origin_id: strArray[7],
         createdAt: date,
         updatedAt: date,
