@@ -2,7 +2,6 @@
 const source = ['./seeders/source/SolarBuddhica.source', './seeders/source/Antiqua.source', './seeders/source/Zerpfy.source'];
 const fs = require('fs');
 const readline = require('readline');
-const data = [];
 
 
 module.exports = {

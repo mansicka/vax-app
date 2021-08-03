@@ -4,7 +4,6 @@ const source = ['./seeders/source/vaccinations.source'];
 const fs = require('fs');
 const readline = require('readline');
 
-const data = [];
 
 const readSourceFile = async (file) => {
     const fileStream = fs.createReadStream(file);
@@ -26,7 +25,6 @@ const readSourceFile = async (file) => {
         }
         data.push(vaccinationObject);
     };
-    return data;
 };
 
 const parseSourceFile = (source) => {
