@@ -2,6 +2,9 @@
 const source = ['./seeders/source/vaccinations.source'];
 const fs = require('fs');
 const readline = require('readline');
+const models = require('../models')
+var Order = models.Order;
+var Vaccination = models.Vaccination;
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -55,7 +58,7 @@ const readSourceFile = async (file) => {
         id: strArray[3],
         gender: strArray[11],
         date: dateNoZ,
-        origin_id: strArray[7],
+        Orderid: strArray[7],
         createdAt: date,
         updatedAt: date,
       }
@@ -69,3 +72,14 @@ const readSourceFile = async (file) => {
   });
 
 };
+
+const findAllVaccinationsByOriginOrderId = (id) => {
+  return Vaccination.count({
+    where: {
+      origin_id: id
+    }
+  })
+    .then((count) => {
+      return count
+    });
+}

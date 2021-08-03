@@ -1,5 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-    const VaccinationOrder = sequelize.define("Order", {
+    const Vaccination = require('./vaccination');
+    const Order = sequelize.define("Order", {
         id: {
             type: DataTypes.STRING,
             primaryKey: true,
@@ -34,6 +35,15 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         }
     });
-    return VaccinationOrder;
+    Order.associate = function (models) {
+        Order.hasMany(models.Vaccination, {
+            foreignKey: {
+                allowNull: true
+            },
+            as: 'vaccinations'
+        });
+    }
+
+    return Order;
 };
 
