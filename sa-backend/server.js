@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const db = require('./models')
 const routes = require('./routes');
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 var Vaccination = db.Vaccination;
 
 app.use(express.urlencoded({ extended: true }));
@@ -17,7 +17,7 @@ db.sequelize.sync().then(async () => {
         process.exit();
     } else {
         app.listen(PORT, () => {
-            console.log('\n Express running on port ' + PORT + ': http://localhost:3000');
+            console.log('\n Express running on port ' + PORT + ': http://localhost:8080');
         });
     }
 

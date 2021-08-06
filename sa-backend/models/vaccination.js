@@ -15,9 +15,5 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         }
     });
-    Vaccination.associate = function (models) {
-        Vaccination.belongsTo(models.Order, { as: 'order' });
-
-    }
     return Vaccination;
 };
