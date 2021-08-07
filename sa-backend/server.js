@@ -3,12 +3,18 @@ const app = express();
 const db = require('./models')
 const routes = require('./routes');
 const PORT = process.env.PORT || 8080;
+const cors = require('cors')
+const helmet = require("helmet");
 var Vaccination = db.Vaccination;
+
+app.use(cors());
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use('/api', routes);
+
+app.use(helmet());
 
 db.sequelize.sync().then(async () => {
     const result = await Vaccination.findAll();
