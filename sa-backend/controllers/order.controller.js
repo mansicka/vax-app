@@ -139,3 +139,20 @@ exports.getCountOrdersByDate = async (req, res) => {
         return res.status(500).send(error.message);
     }
 }
+
+exports.getOrdersExpiredForDate = async (req, res) => {
+    const threshold = new Date(req.params.date);
+    threshold.setDate(threshold.getDate() + 30);
+    try {
+        const orders = await Order.findAll({
+            where: {
+                arriva_date: {
+                    [Op.lt]: threshold
+                },
+            }
+        })
+        return res.status(200).json(orders);
+    } catch (error) {
+        return res.status(500).send(error.message);
+    }
+}

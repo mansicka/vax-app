@@ -21,5 +21,6 @@ router.get('/order/goingbad/:date', OrderController.getOrdersGoingBad);
 router.get('/order/brands', OrderController.getOrderAmountsPerBrand);
 router.get('/order/count', OrderController.getCountAllOrders);
 router.get('/order/dates', OrderController.getCountOrdersByDate);
+router.get('order/gonebad/:date', OrderController.getOrdersExpiredForDate);
 
 module.exports = router

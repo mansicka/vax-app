@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import MainCharts from './components/charts.main';
+import OrderDateSelect from './components/order.dateSelect';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <MainCharts />
+    <OrderDateSelect />
   </React.StrictMode>,
   document.getElementById('root')
 );

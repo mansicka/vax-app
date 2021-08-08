@@ -1,9 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import url from "../util/url"
+import url from "../../util/url"
 import { Doughnut } from 'react-chartjs-2'
 
-function MainCharts() {
+function VaccinationChartsSex() {
     //states
     const [sexes, setSexes] = useState([]);
 
@@ -48,7 +48,7 @@ function MainCharts() {
         labels: ['Male', 'Female', 'Nonbinary'],
         datasets: [
             {
-                label: '# of Votes',
+                label: '# of vaccinations',
                 data: sexes,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
@@ -71,4 +71,4 @@ function MainCharts() {
     );
 }
 
-export default MainCharts;
+export default VaccinationChartsSex;
