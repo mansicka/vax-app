@@ -5,9 +5,9 @@ import OrderDateSelect from './components/order.dateSelect';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <OrderDateSelect />
-  </React.StrictMode>,
+
+  <OrderDateSelect />,
+
   document.getElementById('root')
 );
 

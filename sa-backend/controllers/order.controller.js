@@ -60,6 +60,7 @@ exports.getOrdersByRecipent = async (req, res) => {
 
 exports.getOrdersGoingBad = async (req, res) => {
     try {
+        console.log(req.params.date)
         const startDate = new Date(req.params.date);
         const endDate = new Date(req.params.date);
         endDate.setDate(endDate.getDate() + 30);
@@ -141,12 +142,13 @@ exports.getCountOrdersByDate = async (req, res) => {
 }
 
 exports.getOrdersExpiredForDate = async (req, res) => {
+
     const threshold = new Date(req.params.date);
     threshold.setDate(threshold.getDate() + 30);
     try {
         const orders = await Order.findAll({
             where: {
-                arriva_date: {
+                arrival_date: {
                     [Op.lt]: threshold
                 },
             }
