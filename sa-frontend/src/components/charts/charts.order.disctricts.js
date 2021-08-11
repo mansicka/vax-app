@@ -1,7 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import url from '../../util/url'
-import { Doughnut } from 'react-chartjs-2'
+import { Pie } from 'react-chartjs-2'
+import Typography from '@material-ui/core/Typography'
+import { Grid } from "@material-ui/core";
+
 
 function OrderChartDistricts() {
     //states
@@ -46,9 +49,14 @@ function OrderChartDistricts() {
 
     //options & data for charts.js
     const options = {
+        maintainAspectRatio: true,
         legend: {
             display: true,
-            position: "right"
+            position: "right",
+            labels: {
+                fontSize: 12
+            }
+
         }
     };
     const data = {
@@ -58,11 +66,11 @@ function OrderChartDistricts() {
                 label: '# of orders per district',
                 data: districts,
                 backgroundColor: [
-                    '#003f5c',
-                    '#58508d',
-                    '#bc5090',
-                    '#ff6361',
-                    '#ffa600',
+                    '#ff6384',
+                    '#ff8093',
+                    '#ff99a3',
+                    '#ffb2b5',
+                    '#ffc9c9',
                 ],
                 borderColor: [
                     '#fffff'
@@ -72,9 +80,14 @@ function OrderChartDistricts() {
         ],
     };
     return (
-        <div>
-            <Doughnut data={data} options={options} />
-        </div>
+        <Grid container spacing={3} justifyContent='center'>
+            <Grid item xs={12} style={{ textAlign: "center" }}>
+                <Typography variant='h6'>Orders split by district</Typography>
+            </Grid>
+            <Grid item xs={12}>
+                <Pie data={data} options={options} />
+            </Grid>
+        </Grid>
     );
 }
 

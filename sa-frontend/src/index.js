@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import OrderDateSelect from './components/order.dateSelect';
+import OrdersMain from './components/orders.main';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
 
-  <OrderDateSelect />,
+  <OrdersMain />,
 
   document.getElementById('root')
 );

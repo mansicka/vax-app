@@ -34,6 +34,9 @@ function VaccinationChartsDates() {
                 var count = data.filter((obj) => new Date(obj.date).toISOString().substring(0, 10) === c).length;
                 result.push({ 'date': c, 'count': count })
             })
+            result.sort(function (a, b) {
+                return new Date(a.date).getTime() - new Date(b.date).getTime()
+            })
             return result;
         }
 

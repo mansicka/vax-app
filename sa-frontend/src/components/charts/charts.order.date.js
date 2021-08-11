@@ -2,8 +2,10 @@ import React from "react";
 import { useState, useEffect } from "react";
 import url from "../../util/url"
 import { Line } from 'react-chartjs-2'
+import Typography from '@material-ui/core/Typography'
+import { Grid } from "@material-ui/core";
 
-function OrderhartsDates() {
+function OrderChartsDates() {
     //states
     const [data, setData] = useState([]);
 
@@ -31,6 +33,9 @@ function OrderhartsDates() {
                 var count = data.filter((obj) => new Date(obj.arrival_date).toISOString().substring(0, 10) === c).length;
                 result.push({ 'date': c, 'count': count })
             })
+            result.sort(function (a, b) {
+                return new Date(a.date).getTime() - new Date(b.date).getTime()
+            })
             return result;
         }
 
@@ -47,11 +52,11 @@ function OrderhartsDates() {
         labels: data.map(o => o.date),
         datasets: [
             {
-                label: 'Vaccinations per date',
+                label: 'Orders recieved per date',
                 data: data.map(o => o.count),
                 fill: false,
                 backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255,99,132,0.2)',
             },
         ]
     };
@@ -70,10 +75,16 @@ function OrderhartsDates() {
 
 
     return (
-        <div>
-            <Line data={chartData} options={options} />
-        </div >
+        <Grid container spacing={3} justifyContent='center'>
+            <Grid item xs={12} style={{ textAlign: "center" }}>
+                <Typography variant='h6'>Orders received by date</Typography>
+            </Grid>
+            <Grid item xs={12}>
+                <Line data={chartData} options={options} />
+            </Grid>
+        </Grid>
+
     );
 }
 
-export default OrderhartsDates;
+export default OrderChartsDates;
