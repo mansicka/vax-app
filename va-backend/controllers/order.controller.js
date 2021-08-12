@@ -77,45 +77,20 @@ exports.getOrdersGoingBad = async (req, res) => {
 }
 
 exports.getOrderAmountsPerBrand = async (req, res) => {
+
     try {
-        const zerpfy = await Order.count(
-            {
-                where: {
-                    vaccine_brand: 'Zerpfy'
-                }, include: [
-                    {
-                        model: Vaccination,
-                        as: 'vaccinations'
-                    }
-                ]
-            }
-        );
-        const solarBuddhica = await Order.count(
-            {
-                where: {
-                    vaccine_brand: 'SolarBuddhica'
-                }, include: [
-                    {
-                        model: Vaccination,
-                        as: 'vaccinations'
-                    }
-                ]
-            }
-        );
-        const antiqua = await Order.count(
-            {
-                where: {
-                    vaccine_brand: 'Antiqua'
-                }, include: [
-                    {
-                        model: Vaccination,
-                        as: 'vaccinations'
-                    }
-                ]
-            }
-        );
-        const orders = { 'Zerpfy': zerpfy, 'SolarBuddhica': solarBuddhica, 'Antiqua': antiqua };
-        return res.status(200).json(orders);
+        const orders = await Order.findAll();
+        let zerpfy = 0;
+        let solarb = 0;
+        let antiqua = 0
+        let results = [];
+        orders.forEach(order => {
+            if (order.vaccine_brand == 'Zerpfy') { zerpfy++ }
+            if (order.vaccine_brand == 'SolarBuddhica') { solarb++ }
+            if (order.vaccine_brand == 'Antiqua') { antiqua++ }
+        });
+        results.push({ 'Zerpfy': zerpfy, 'SolarBuddhica': solarb, 'Antiqua': antiqua })
+        return res.status(200).json(results);
     } catch (error) {
         return res.status(500).send(error.message);
     }

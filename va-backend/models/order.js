@@ -25,10 +25,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        injections_left: {
-            type: DataTypes.INTEGER,
-            allowNull: true
-        },
 
         arrival_date: {
             type: DataTypes.DATE(6),

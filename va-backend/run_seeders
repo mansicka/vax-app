@@ -2,5 +2,4 @@
 echo -e "Seeding the database..."
 npx sequelize db:seed --seed 20210801085403-OrderData.js
 npx sequelize db:seed --seed  20210801085348-VaccinationData.js
-node ./seeders/updateOrders.js --silent
 echo -e  "\n \n I am done! Now run 'npm start!'"

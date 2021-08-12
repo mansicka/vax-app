@@ -61,7 +61,6 @@ const readSourceFile = async (file) => {
         arrival_date: dateNoZ,
         createdAt: date,
         updatedAt: date,
-        injections_left: strArray[20].slice(1, -1),
       }
 
       data.push(orderObject);

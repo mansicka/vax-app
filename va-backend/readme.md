@@ -1,5 +1,5 @@
-# sa-backend
-###### A backend service for vax-app
+# va-backend
+A backend service for vax-app front end application
 
 ## **Introduction**
 
@@ -7,7 +7,7 @@ sa-backend is a backend service for vax-app for node.js. It uses Sequelize to co
 
 ## **Dependencies**
 
-sa-backend has following dependencies:
+va-backend has following dependencies:
 
 cors - for CORS
 
@@ -30,7 +30,7 @@ To install required packages, run 'npm install'.
 
 Set up your database connection of choice in /config/config.js
 
-To seed the database, you first need to change the seeders bash script file to be executable. In the main directory, run:
+To seed the database, you first need to change the seeders bash script file permissions to be executable. In the main directory, run:
 
      chmod +x run_seeders 
      
@@ -38,11 +38,10 @@ Then you can start the database seeding process by running
 
     ./run_seeders 
 
-For non-bash users, you can do this manually by running the seeding scripts **in following order**:
+For non-bash users, you can do this manually by running the seeding scripts:
 
     npx sequelize db:seed --seed 20210801085403-OrderData.js
     npx sequelize db:seed --seed  20210801085348-VaccinationData.js
-    node ./seeders/updateOrders.js --silent
 
 
 Now, if everything goes well and should the scripts run without errors, you can start the sa-backend service by running:

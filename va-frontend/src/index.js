@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import OrdersMain from './components/orders.main';
+import AllMain from './components/all.main';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
 
-  <OrdersMain />,
+  <AllMain />,
 
   document.getElementById('root')
 );

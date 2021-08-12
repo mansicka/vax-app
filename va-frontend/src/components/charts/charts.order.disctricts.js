@@ -82,7 +82,7 @@ function OrderChartDistricts() {
     return (
         <Grid container spacing={3} justifyContent='center'>
             <Grid item xs={12} style={{ textAlign: "center" }}>
-                <Typography variant='h6'>Orders split by district</Typography>
+                <Typography variant='h5'>Orders split by district</Typography>
             </Grid>
             <Grid item xs={12}>
                 <Pie data={data} options={options} />

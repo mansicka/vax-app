@@ -77,7 +77,7 @@ function OrderChartsDates() {
     return (
         <Grid container spacing={3} justifyContent='center'>
             <Grid item xs={12} style={{ textAlign: "center" }}>
-                <Typography variant='h6'>Orders received by date</Typography>
+                <Typography variant='h5'>Orders received by date</Typography>
             </Grid>
             <Grid item xs={12}>
                 <Line data={chartData} options={options} />
